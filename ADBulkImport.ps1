@@ -10,7 +10,6 @@ DESCRIPTION:
 #>
 
 ### VARIABLE DECLORATION ###
-$selection = $null
 
 ### FUNCTION CREATION ###
 
@@ -21,7 +20,7 @@ function Show-Menu {
     Please select form the options below." -ForegroundColor Green
     Write-Host "
     1: Start a new import
-    E: Exit Script" -ForegroundColor White
+    9: Exit Script" -ForegroundColor White
 }
 function Get-CSV {
     # Obtaining file path and name
@@ -31,8 +30,11 @@ function Get-CSV {
     $CSVfull = "$CSVpath\$CSVname"
     
     if ((Test-Path -Path "$CSVfull") -eq $false ) {
-        <# Action to perform if the condition is true #>
-        Write-Host "The file $CSVname cannot be found in $CSVpath"
+        Write-Host ""
+        Write-Host "The file " -ForegroundColor Red -NoNewline
+        Write-Host "$CSVname" -ForegroundColor Yellow -NoNewline
+        Write-Host " cannot be found in" -ForegroundColor Red
+        Write-Host "$CSVpath" -ForegroundColor Yellow
     }
     else {
         Write-Host "File has been found"
@@ -43,15 +45,12 @@ function Get-CSV {
 Clear-Host
 try {
     Show-Menu
-    switch ($selection) {
+    switch ($selection = Read-Host -Prompt "Selection") {
         1 {Get-CSV}
-        E {Exit-PSHostProcess}
+        9 {Exit-PSHostProcess}
     }
 
 }
 catch {
     <#Do this if a terminating exception happens#>
-}
-finally {
-    <#Do this after the try block regardless of whether an exception occurred or not#>
 }
