@@ -20,7 +20,8 @@ function Show-Menu {
     Please select form the options below." -ForegroundColor Green
     Write-Host "
     1: Start a new import
-    9: Exit Script" -ForegroundColor White
+    9: Exit Script
+    " -ForegroundColor White
 }
 function Get-CSV {
     # Obtaining file path and name
@@ -37,15 +38,22 @@ function Get-CSV {
         Write-Host "$CSVpath" -ForegroundColor Yellow
     }
     else {
-        Write-Host "File has been found"
+        Write-Host "File has been found" -ForegroundColor Green
     }
 }
 
 ### BODY ###
 Clear-Host
 try {
-    Show-Menu
-    switch ($selection = Read-Host -Prompt "Selection") {
+   Show-Menu
+    $option = Read-Host -Prompt "What is yout selection"
+    while ($option -neq 9) {
+        switch ($x) {
+            condition {  }
+            Default {}
+        }
+    }
+    switch ($option) {
         1 {Get-CSV}
         9 {Exit-PSHostProcess}
     }
