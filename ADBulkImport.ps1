@@ -10,10 +10,19 @@ DESCRIPTION:
 #>
 
 ### VARIABLE DECLORATION ###
-$input = $null
-
+$selection = $null
 
 ### FUNCTION CREATION ###
+
+function Show-Menu {
+    Clear-Host
+    Write-Host "
+    Welcome to the Powershell AD Bulk User Import tool.
+    Please select form the options below." -ForegroundColor Green
+    Write-Host "
+    1: Start a new import
+    E: Exit Script" -ForegroundColor White
+}
 function Get-CSV {
     # Obtaining file path and name
     Write-Host "Getting file path..." -ForegroundColor Cyan
@@ -31,8 +40,13 @@ function Get-CSV {
 }
 
 ### BODY ###
+Clear-Host
 try {
-    Clear-Host
+    Show-Menu
+    switch ($selection) {
+        1 {Get-CSV}
+        E {Exit-PSHostProcess}
+    }
 
 }
 catch {
